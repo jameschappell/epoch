@@ -222,22 +222,22 @@ gerun /home/ucapjch/Binaries/epoch2d
 
 usedata = '''.'''
 
-def make_environment(resultsdir, delay, length = 50e-6):
+def make_environment(resultsdir, delay, cwd, length = 50e-6):
 
     """Edits template files and updates for required values."""
 
     sg = os.path.join(resultsdir, 'input.deck')
     fh = open(sg, "wb")
 
-    restart_string = '  restart_snapshot = ' + str(delay)
+    restart_string = 'restart_snapshot = ' + str(delay)
     inputdeck1 = string.replace(inputdeck, 'restart_snapshot_def',
                                        restart_string)
 
-    injector_start_string = '  t_start = ' + str(delay) + 'e-12'
+    injector_start_string = 't_start = ' + str(delay) + 'e-12'
     inputdeck2 = string.replace(inputdeck1, 't_start_def',
                                 injector_start_string)
 
-    injector_end_string = '  t_end = ' + str(delay) + 'e-12 + ' + str(length)\
+    injector_end_string = 't_end = ' + str(delay) + 'e-12 + ' + str(length)\
                           + '/c'
     inputdeck3 = string.replace(inputdeck2, 't_end_def', injector_end_string)
 
@@ -247,11 +247,11 @@ def make_environment(resultsdir, delay, length = 50e-6):
     ss = os.path.join(resultsdir, 'sub_script.bash')
     fs = open(ss, "wb")
 
-    work_dir_string = '#$ -wd ' + os.getcwd() + '/' + res_dir
+    work_dir_string = '#$ -wd ' + cwd + '/' + res_dir
     subscript1 = string.replace(subscript, 'work_dir_def', work_dir_string)
 
-    change_dir_string = 'cd ' + os.getcwd() + '/' + res_dir
-    subscript2 = string.replace(subscript1, 'change_dir', change_dir_string)
+    change_dir_string = 'cd ' + cwd + '/' + res_dir
+    subscript2 = string.replace(subscript1, 'cd_dir', change_dir_string)
 
     fs.write(subscript2)
     fs.close()
@@ -336,7 +336,7 @@ if __name__ == "__main__":
         copyname = str(delayname) + '.sdf'
         shutil.copy2(copyname, cwd + '/' + res_dir)
 
-        make_environment(cwd + '/' + res_dir, delay, length)
+        make_environment(cwd + '/' + res_dir, delay, cwd, length)
         os.chdir(cwd + '/' + res_dir)
         os.mkdir('logs')
         run_command = "qsub sub_script.bash"
