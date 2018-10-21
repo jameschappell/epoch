@@ -323,7 +323,7 @@ if __name__ == "__main__":
         os.chdir(cwd)
 
         print "Delay: %s ps" % (delay)
-        res_dir = str(delay)
+        res_dir = int(delay)
         print "Making directory: ", res_dir
         if os.path.isdir(res_dir) is False:
             os.mkdir(res_dir)
@@ -331,7 +331,9 @@ if __name__ == "__main__":
             print "Directory %s already exists. Stopping." % (res_dir)
             break
         os.chdir(filename)
-        copyname = format(str(delay), "04") + '.sdf'
+        delayname = format(int(delay), "04")
+        print delayname
+        copyname = delayname + '.sdf'
         shutil.copyfile(copyname, cwd + '/' + res_dir)
 
         make_environment(res_dir, delay, length)
