@@ -336,7 +336,7 @@ if __name__ == "__main__":
         copyname = str(delayname) + '.sdf'
         shutil.copy2(copyname, cwd + '/' + res_dir)
 
-        make_environment(res_dir, delay, length)
+        make_environment(cwd + '/' + res_dir, delay, length)
         os.chdir(cwd + '/' + res_dir)
         os.mkdir('logs')
         run_command = "qsub sub_script.bash"
