@@ -333,8 +333,8 @@ if __name__ == "__main__":
         os.chdir(filename)
         delayname = '{0:04}'.format(int(delay))
         print delayname
-        copyname = delayname + '.sdf'
-        shutil.copyfile(copyname, cwd + '/' + res_dir)
+        copyname = str(delayname) + '.sdf'
+        shutil.copy2(copyname, cwd + '/' + res_dir)
 
         make_environment(res_dir, delay, length)
         os.chdir(cwd + '/' + res_dir)
