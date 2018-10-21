@@ -331,7 +331,7 @@ if __name__ == "__main__":
             print "Directory %s already exists. Stopping." % (res_dir)
             break
         os.chdir(filename)
-        delayname = format(str(int(delay)), "04")
+        delayname = '{0:04}'.format(int(delay))
         print delayname
         copyname = delayname + '.sdf'
         shutil.copyfile(copyname, cwd + '/' + res_dir)
