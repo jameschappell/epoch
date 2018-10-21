@@ -331,7 +331,7 @@ if __name__ == "__main__":
             print "Directory %s already exists. Stopping." % (res_dir)
             break
         os.chdir(filename)
-        copyname = format(delay, "04") + '.sdf'
+        copyname = format(str(delay), "04") + '.sdf'
         shutil.copyfile(copyname, cwd + '/' + res_dir)
 
         make_environment(res_dir, delay, length)
