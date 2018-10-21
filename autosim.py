@@ -73,7 +73,6 @@ begin:control
 
   # final time of simulation
   t_end_final
-  t_end = 100e-12 + 2e-3/c # xmax
 
   # size of domain
   x_min = 0.0
@@ -345,7 +344,7 @@ if __name__ == "__main__":
         os.mkdir('logs')
         run_command = "qsub sub_script.bash"
         print run_command
-        #os.system(run_command)
+        os.system(run_command)
 
 
 
