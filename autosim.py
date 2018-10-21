@@ -316,7 +316,7 @@ if __name__ == "__main__":
     # du bist doof
     cwd = os.getcwd()
 
-    delay_values = np.linspace(start, end+1, step)
+    delay_values = np.arange(start, end+1, step)
 
     for delay in delay_values:
 
