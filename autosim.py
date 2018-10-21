@@ -72,6 +72,7 @@ begin:control
   nsteps = -1
 
   # final time of simulation
+  t_end_final
   t_end = 100e-12 + 2e-3/c # xmax
 
   # size of domain
@@ -233,15 +234,18 @@ def make_environment(resultsdir, delay, cwd, length = 50e-6):
     inputdeck1 = string.replace(inputdeck, 'restart_snapshot_def',
                                        restart_string)
 
+    tenddef = 't_end = ' + str(delay) + 'e-12 + 2e-3/c'
+    inputdeck2 = string.replace(inputdeck1, 't_end_final', tenddef)
+
     injector_start_string = 't_start = ' + str(delay) + 'e-12'
-    inputdeck2 = string.replace(inputdeck1, 't_start_def',
+    inputdeck3 = string.replace(inputdeck2, 't_start_def',
                                 injector_start_string)
 
     injector_end_string = 't_end = ' + str(delay) + 'e-12 + ' + str(length)\
                           + '/c'
-    inputdeck3 = string.replace(inputdeck2, 't_end_def', injector_end_string)
+    inputdeck4 = string.replace(inputdeck3, 't_end_def', injector_end_string)
 
-    fh.write(inputdeck3)
+    fh.write(inputdeck4)
     fh.close()
 
     ss = os.path.join(resultsdir, 'sub_script.bash')
