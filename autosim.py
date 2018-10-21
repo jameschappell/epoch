@@ -229,7 +229,7 @@ def make_environment(resultsdir, delay, cwd, length = 50e-6):
     sg = os.path.join(resultsdir, 'input.deck')
     fh = open(sg, "wb")
 
-    restart_string = 'restart_snapshot = ' + str(delay)
+    restart_string = 'restart_snapshot = ' + str(int(delay))
     inputdeck1 = string.replace(inputdeck, 'restart_snapshot_def',
                                        restart_string)
 
@@ -251,7 +251,7 @@ def make_environment(resultsdir, delay, cwd, length = 50e-6):
     subscript1 = string.replace(subscript, 'work_dir_def', work_dir_string)
 
     change_dir_string = 'cd ' + cwd + '/' + res_dir
-    subscript2 = string.replace(subscript1, 'cd_dir', change_dir_string)
+    subscript2 = string.replace(subscript1, 'cd_def', change_dir_string)
 
     fs.write(subscript2)
     fs.close()
